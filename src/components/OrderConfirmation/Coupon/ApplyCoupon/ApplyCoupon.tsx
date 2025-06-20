@@ -70,7 +70,7 @@ function ApplyCoupon({
       >
         <Styled.Title>쿠폰을 선택해 주세요</Styled.Title>
         <Styled.Notice>
-          <Styled.NoticeIcon src={notice} />
+          <Styled.NoticeIcon src={notice} alt="쿠폰 사용시 주의사항 아이콘" />
           <Styled.Text>
             쿠폰은 최대 {COUPON_RULE.maxCoupons}개까지 사용할 수 있습니다.
           </Styled.Text>
