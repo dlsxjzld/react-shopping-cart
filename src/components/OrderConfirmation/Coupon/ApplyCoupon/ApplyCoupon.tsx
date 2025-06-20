@@ -1,5 +1,5 @@
 import { useModal } from "@sinjuk1/modal";
-import ApplyCouponButton from "../ApplyCouponButton/ApplyCouponButton";
+import ApplyCouponModalButton from "../ApplyCouponModalButton/ApplyCouponModalButton";
 import notice from "/notice.svg";
 
 import * as Styled from "./ApplyCoupon.style";
@@ -62,7 +62,7 @@ function ApplyCoupon({
 
   return (
     <article>
-      <ApplyCouponButton onClick={handleOpenModal} />
+      <ApplyCouponModalButton onClick={handleOpenModal} />
       <ApplyCouponModal
         isOpen={isOpen}
         handleCloseModal={handleRollbackSelectedCouponsWithCloseModal}
