@@ -11,6 +11,7 @@ import useSelectedCoupons from "../../../../hooks/orderConfirmation/useCoupons/u
 import useAvailableCoupons from "../../../../hooks/orderConfirmation/useCoupons/useAvailableCoupons";
 import { calculateCoupons } from "../../../../util/coupons/calculateCoupons";
 import ApplyCouponModal from "../ApplyCouponModal/ApplyCouponModal";
+import ApplyDiscountButton from "../ApplyDiscountButton/ApplyDiscountButton";
 
 const COUPON_RULE = {
   maxCoupons: 2,
@@ -89,9 +90,10 @@ function ApplyCoupon({
             />
           ))}
         </CouponList>
-        <Styled.Button type="button" onClick={handleUseCouponsWithCloseModal}>
-          총 {maxDiscountedPrice.toLocaleString()}원 할인 쿠폰 사용하기
-        </Styled.Button>
+        <ApplyDiscountButton
+          maxDiscountedPrice={maxDiscountedPrice}
+          handleUseCoupons={handleUseCouponsWithCloseModal}
+        />
       </ApplyCouponModal>
     </article>
   );
