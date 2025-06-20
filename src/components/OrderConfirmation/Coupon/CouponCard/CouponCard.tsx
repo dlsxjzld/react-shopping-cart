@@ -9,7 +9,7 @@ interface CouponCardProps {
   coupon: Coupon;
   isSelected: boolean;
   isDisabled: boolean;
-  handleSelectCoupon: (id: number) => void;
+  handleSelectCoupon: () => void;
 }
 
 function CouponCard({

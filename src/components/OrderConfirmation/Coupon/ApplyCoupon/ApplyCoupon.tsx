@@ -85,7 +85,7 @@ function ApplyCoupon({
                 (selectedCouponIds.length === COUPON_RULE.maxCoupons &&
                   !selectedCouponIds.includes(coupon.id))
               }
-              handleSelectCoupon={handleToggleSelectedCouponId}
+              handleSelectCoupon={() => handleToggleSelectedCouponId(coupon.id)}
             />
           ))}
         </CouponList>

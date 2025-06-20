@@ -6,7 +6,7 @@ interface CommonCouponProps {
   coupon: BaseCouponType;
   isSelected: boolean;
   isDisabled: boolean;
-  handleSelectCoupon: (id: number) => void;
+  handleSelectCoupon: () => void;
 }
 
 function CommonCoupon({
@@ -15,7 +15,7 @@ function CommonCoupon({
   isDisabled,
   handleSelectCoupon,
 }: CommonCouponProps) {
-  const { id, description, expirationDate } = coupon;
+  const { description, expirationDate } = coupon;
 
   const ExpirationDate = new Date(expirationDate);
   const year = ExpirationDate.getFullYear();
@@ -26,7 +26,7 @@ function CommonCoupon({
     <>
       <Styled.Wrapper>
         <CheckBox
-          onClick={() => handleSelectCoupon(id)}
+          onClick={handleSelectCoupon}
           isChecked={isSelected}
           isDisabled={isDisabled}
         />
