@@ -1,4 +1,4 @@
-import { Modal, useModal } from "@sinjuk1/modal";
+import { useModal } from "@sinjuk1/modal";
 import ApplyCouponButton from "../ApplyCouponButton/ApplyCouponButton";
 import notice from "/notice.svg";
 
@@ -10,6 +10,7 @@ import { CartItem } from "../../../../type/CartItem";
 import useSelectedCoupons from "../../../../hooks/orderConfirmation/useCoupons/useSelectedCoupons";
 import useAvailableCoupons from "../../../../hooks/orderConfirmation/useCoupons/useAvailableCoupons";
 import { calculateCoupons } from "../../../../util/coupons/calculateCoupons";
+import ApplyCouponModal from "../ApplyCouponModal/ApplyCouponModal";
 
 const COUPON_RULE = {
   maxCoupons: 2,
@@ -62,45 +63,36 @@ function ApplyCoupon({
   return (
     <article>
       <ApplyCouponButton onClick={handleOpenModal} />
-      <Modal
+      <ApplyCouponModal
         isOpen={isOpen}
-        onClose={handleRollbackSelectedCouponsWithCloseModal}
+        handleCloseModal={handleRollbackSelectedCouponsWithCloseModal}
       >
-        <Modal.Container
-          position="center"
-          size="small"
-          containerStyle={{ maxHeight: "500px" }}
-        >
-          <Modal.CloseButton />
-          <Styled.Title>쿠폰을 선택해 주세요</Styled.Title>
-          <Styled.Notice>
-            <Styled.NoticeIcon src={notice} />
-            <Styled.Text>
-              쿠폰은 최대 {COUPON_RULE.maxCoupons}개까지 사용할 수 있습니다.
-            </Styled.Text>
-          </Styled.Notice>
-          <CouponList>
-            {coupons.map((coupon) => (
-              <CouponCard
-                key={coupon.id}
-                coupon={coupon}
-                isSelected={selectedCouponIds.includes(coupon.id)}
-                isDisabled={
-                  !availableCouponsIdList.includes(coupon.id) ||
-                  (selectedCouponIds.length === COUPON_RULE.maxCoupons &&
-                    !selectedCouponIds.includes(coupon.id))
-                }
-                handleSelectCoupon={() =>
-                  handleToggleSelectedCouponId(coupon.id)
-                }
-              />
-            ))}
-          </CouponList>
-          <Styled.Button type="button" onClick={handleUseCouponsWithCloseModal}>
-            총 {maxDiscountedPrice.toLocaleString()}원 할인 쿠폰 사용하기
-          </Styled.Button>
-        </Modal.Container>
-      </Modal>
+        <Styled.Title>쿠폰을 선택해 주세요</Styled.Title>
+        <Styled.Notice>
+          <Styled.NoticeIcon src={notice} />
+          <Styled.Text>
+            쿠폰은 최대 {COUPON_RULE.maxCoupons}개까지 사용할 수 있습니다.
+          </Styled.Text>
+        </Styled.Notice>
+        <CouponList>
+          {coupons.map((coupon) => (
+            <CouponCard
+              key={coupon.id}
+              coupon={coupon}
+              isSelected={selectedCouponIds.includes(coupon.id)}
+              isDisabled={
+                !availableCouponsIdList.includes(coupon.id) ||
+                (selectedCouponIds.length === COUPON_RULE.maxCoupons &&
+                  !selectedCouponIds.includes(coupon.id))
+              }
+              handleSelectCoupon={handleToggleSelectedCouponId}
+            />
+          ))}
+        </CouponList>
+        <Styled.Button type="button" onClick={handleUseCouponsWithCloseModal}>
+          총 {maxDiscountedPrice.toLocaleString()}원 할인 쿠폰 사용하기
+        </Styled.Button>
+      </ApplyCouponModal>
     </article>
   );
 }
